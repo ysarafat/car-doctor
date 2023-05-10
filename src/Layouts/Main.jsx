@@ -7,7 +7,7 @@ function Main() {
     return (
         <div>
             <Navbar />
-            <div className="min-h-[calc(100vh-615px)]">
+            <div className="min-h-[calc(100vh-615px)] container mx-auto px-4">
                 <Outlet />
             </div>
             <Footer />
