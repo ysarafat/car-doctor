@@ -8,7 +8,7 @@ import bannerimg6 from '../../../assets/images/banner/6.jpg';
 function Banner() {
     return (
         <div className="">
-            <div className="carousel w-full h-[600px] rounded-lg mt-4 ">
+            <div className="carousel w-full h-[600px] rounded-lg mt-6 lg:mt-4 ">
                 <div id="slide1" className="carousel-item relative w-full">
                     <img src={bannerimg2} alt="banner" className="w-full " />
                     <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
