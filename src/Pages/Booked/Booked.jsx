@@ -1,6 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
+import BookedCard from './BookedCard';
 
 function Booked() {
     const { user } = useContext(AuthContext);
@@ -12,11 +14,13 @@ function Booked() {
             .then((data) => {
                 setBooking(data);
             });
-    }, []);
-    console.log(booking);
+    }, [booking]);
+
     return (
-        <div>
-            <h1>a</h1>
+        <div className="min-h-[calc(100vh-87px)] my-16">
+            <div className="w-full">
+                <BookedCard booked={booking} />
+            </div>
         </div>
     );
 }
