@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BsHandbag, BsSearch } from 'react-icons/bs';
 import { HiMenuAlt1, HiX } from 'react-icons/hi';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
+import { AuthContext } from '../../../context/AuthProvider';
 
 function Navbar() {
+    const { logoutUser, user } = useContext(AuthContext);
     const [isOpen, setIsOpen] = useState(false);
     const navLinks = (
         <>
@@ -48,6 +50,26 @@ function Navbar() {
             >
                 <li>Contact</li>
             </NavLink>
+            {!user && (
+                <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                        isActive ? 'text-primary' : 'text-dark hover:text-light-dark'
+                    }
+                >
+                    <li>Sign In</li>
+                </NavLink>
+            )}
+            {user && (
+                <NavLink
+                    onClick={logoutUser}
+                    className={({ isActive }) =>
+                        isActive ? '' : 'text-dark hover:text-light-dark'
+                    }
+                >
+                    <li>Sign Out</li>
+                </NavLink>
+            )}
         </>
     );
 

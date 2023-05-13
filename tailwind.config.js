@@ -9,6 +9,7 @@ export default {
                 'deep-dark': '#151515',
                 'light-dark': '#737373',
                 'light-text': '#E8E8E8',
+                form: '#F3F3F3',
             },
         },
     },

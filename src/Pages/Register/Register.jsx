@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg';
 import { AuthContext } from '../../context/AuthProvider';
 
 function Register() {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [error, setError] = useState('');
     const handelSignUp = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -13,14 +14,19 @@ function Register() {
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
-        console.log(name, email, password, confirmPassword);
-        createUser(email, password)
-            .then((res) => {
-                console.log(res.user);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        setError('');
+        if (password === confirmPassword) {
+            createUser(email, password)
+                .then((res) => {
+                    updateUser(name);
+                    console.log(res.user);
+                })
+                .catch((err) => {
+                    setError(err.message);
+                });
+        } else {
+            setError("Password didn't match");
+        }
     };
 
     return (
@@ -30,6 +36,13 @@ function Register() {
             </div>
             <div className="lg:w-1/2 w-full">
                 <h1 className="text-4xl text-deep-dark font-bold mb-8 text-center">Sign Up</h1>
+                {error && (
+                    <div className="bg-red-100 border border-red-500 rounded-lg">
+                        <p className="text-base font-semibold text-red-500 px-2 py-1 text-center">
+                            {error}
+                        </p>
+                    </div>
+                )}
 
                 <form onSubmit={handelSignUp} className="flex flex-col">
                     <label htmlFor="" className="text-lg font-semibold text-deep-dark my-2">

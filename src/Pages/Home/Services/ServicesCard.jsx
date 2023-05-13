@@ -12,7 +12,7 @@ function ServicesCard({ services }) {
                     <h2 className="text-2xl font-bold text-dark mb-1">{title}</h2>
                     <p className="text-xl font-semibold text-primary">Price : ${price}</p>
                 </div>
-                <Link to={`/checkout/${_id}`}>
+                <Link to={`/booking/${_id}`}>
                     <BsArrowRightShort size={30} style={{ color: '#FF3811' }} />
                 </Link>
             </div>
