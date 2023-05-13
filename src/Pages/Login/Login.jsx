@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg';
 import { AuthContext } from '../../context/AuthProvider';
 
 function Login() {
     const { signInUser } = useContext(AuthContext);
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const navigate = useNavigate();
     const handelSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -14,6 +17,7 @@ function Login() {
         signInUser(email, password)
             .then((res) => {
                 console.log(res.user);
+                navigate(from, { replace: true });
             })
             .catch((err) => {
                 console.log(err);
