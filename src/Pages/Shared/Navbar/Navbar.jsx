@@ -61,14 +61,24 @@ function Navbar() {
                 </NavLink>
             )}
             {user && (
-                <NavLink
-                    onClick={logoutUser}
-                    className={({ isActive }) =>
-                        isActive ? '' : 'text-dark hover:text-light-dark'
-                    }
-                >
-                    <li>Sign Out</li>
-                </NavLink>
+                <>
+                    <NavLink
+                        to="/booked-service"
+                        className={({ isActive }) =>
+                            isActive ? 'text-primary' : 'text-dark hover:text-light-dark'
+                        }
+                    >
+                        <li>Bookings</li>
+                    </NavLink>
+                    <NavLink
+                        onClick={logoutUser}
+                        className={({ isActive }) =>
+                            isActive ? '' : 'text-dark hover:text-light-dark'
+                        }
+                    >
+                        <li>Sign Out</li>
+                    </NavLink>
+                </>
             )}
         </>
     );

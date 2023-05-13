@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthProvider';
 function Checkout() {
     const { user } = useContext(AuthContext);
     const service = useLoaderData();
-    const { title, price } = service;
+    const { title, price, _id, img } = service;
     const handelBookingForm = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -17,17 +17,28 @@ function Checkout() {
         const bookingAmount = form.bookingAmount.value;
         const bookingNotes = form.details.value;
         const dueAmount = price - bookingAmount;
+
         const booking = {
             customerName,
             customerEmail,
             service,
             bookingDate,
             price,
+            img,
             bookingAmount,
             dueAmount,
             bookingNotes,
+            serviceId: _id,
         };
-        console.log(booking);
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(booking),
+        })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
     };
 
     return (
